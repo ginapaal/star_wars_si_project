@@ -1,10 +1,15 @@
 from flask import Flask, render_template
-
+import json
+import requests
 app = Flask(__name__)
 
 
 @app.route('/')
 def main():
+    data = requests.get("http://swapi.co/api/planets")
+    data = data.text
+    data_to_json = json.loads(data)
+    print(data_to_json)
     return render_template("index.html")
 
 
