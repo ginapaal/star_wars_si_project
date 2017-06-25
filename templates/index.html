@@ -26,7 +26,7 @@
     </nav>
 
     <!-- Body -->
-    <div class="container-fluid">
+    <div class="container">
         <div class="jumbotron">
             <h1> Star Wars universe planets </h1>
             <button class="btn btn-info"> Previous </button>
@@ -46,14 +46,18 @@
                 </tr>
             </thead>
             <tbody>
+                {% for dict_item in planet_info %}
+                    
                 <tr>
-                    <td> Gina </td>
-                    <td> 6 </td>
-                    <td> Mediterrán </td>
-                    <td> Nemértem </td>
-                    <td> 43 </td>
-                    <td> 2 </td>
+                   <td>{{ dict_item['name'] }}</td>
+                   <td>{{ dict_item['diameter'] }}</td>
+                   <td>{{ dict_item['climate'] }}</td>
+                   <td>{{ dict_item['terrain'] }}</td>
+                   <td>{{ dict_item['surface_water'] }}</td>
+                   <td>{{ dict_item['population'] }}</td>
                 </tr>
+                    
+                {% endfor %}
             </tbody>
         </table>
     </div>

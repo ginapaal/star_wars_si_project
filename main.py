@@ -9,8 +9,11 @@ def main():
     data = requests.get("http://swapi.co/api/planets")
     data = data.text
     data_to_json = json.loads(data)
-    print(data_to_json)
-    return render_template("index.html")
+    planet_info = []
+    for results in data_to_json['results']:
+        planet_info.append(results)
+
+    return render_template("index.html", planet_info=planet_info)
 
 
 @app.route('/sign-up')
