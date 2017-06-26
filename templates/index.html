@@ -43,20 +43,24 @@
                     <th> Terrain </th>
                     <th> Water </th>
                     <th> Population </th>
+                    <th> Residents </th>
                 </tr>
             </thead>
             <tbody>
-                {% for dict_item in planet_info %}
-                    
+                {% for dict_item in planet_info %}  
                 <tr>
-                   <td>{{ dict_item['name'] }}</td>
-                   <td>{{ dict_item['diameter'] }}</td>
-                   <td>{{ dict_item['climate'] }}</td>
-                   <td>{{ dict_item['terrain'] }}</td>
-                   <td>{{ dict_item['surface_water'] }}</td>
-                   <td>{{ dict_item['population'] }}</td>
+                    <td>{{ dict_item['name'] }}</td>
+                    <td>{{ dict_item['diameter'] }}</td>
+                    <td>{{ dict_item['climate'] }}</td>
+                    <td>{{ dict_item['terrain'] }}</td>
+                    <td>{{ dict_item['surface_water'] }} %</td>
+                    <td>{{ dict_item['population'] }}</td>
+                    {% if dict_item['residents']==[] %}
+                        <td> No known residents</td>
+                    {% else %}
+                        <td><button> {{ dict_item['residents']|length }} residents</button> </td>
+                    {% endif %}
                 </tr>
-                    
                 {% endfor %}
             </tbody>
         </table>
