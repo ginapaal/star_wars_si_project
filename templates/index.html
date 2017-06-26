@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- favicon -->
     <link rel="shortcut icon" href="/static/img/Star-Wars-Logo_Silver.png">
+    <link rel="stylesheet" href="static/css/main.css">
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="static/js/main.js" defer></script>
     <title>The world of star wars</title>
 </head>
 <body>
@@ -29,12 +33,11 @@
     <div class="container">
         <div class="jumbotron">
             <h1> Star Wars universe planets </h1>
-            <button class="btn btn-info"> Previous </button>
-            <button class="btn btn-info"> Next </button>
+            <button class="btn btn-info" id="main_btn"> Previous </button>
+            <button class="btn btn-info"id="main_btn"> Next </button>
         </div>
-
     <!-- Table -->
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover" id="table">
             <thead>
                 <tr>
                     <th> Name </th>
@@ -58,12 +61,36 @@
                     {% if dict_item['residents']==[] %}
                         <td> No known residents</td>
                     {% else %}
-                        <td><button> {{ dict_item['residents']|length }} residents</button> </td>
+                        <td><button class="resident_btn"> {{ dict_item['residents']|length }} residents</button> </td>
                     {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <!-- Modal -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal" id="residentModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button class="close" data-dismiss="modal">&time;</button>
+                                    <h4 class="modal-title"> Residents </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p> Éljen </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-dismiss="modal"> Close </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>
