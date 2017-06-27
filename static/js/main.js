@@ -13,3 +13,17 @@ $(document).ready(function(){
         $('#residentModal').modal('toggle');
     });
 });
+
+//display people when residents button clicked
+
+$(document).ready(function(){
+    $('.resident_btn').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: 'http://swapi.co/api/people/6',
+            success: function(data){
+                console.log(data);
+            },
+        });
+    })
+});

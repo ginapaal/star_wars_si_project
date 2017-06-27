@@ -12,8 +12,10 @@ def main():
     planet_info = []
     for results in data_to_json['results']:
         planet_info.append(results)
+    next_link = data_to_json['next']
+    previous_link = data_to_json['previous']
 
-    return render_template("index.html", planet_info=planet_info)
+    return render_template("index.html", planet_info=planet_info, next_link=next_link, previous_link=previous_link)
 
 
 @app.route('/sign-up')

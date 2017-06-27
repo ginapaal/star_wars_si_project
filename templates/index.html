@@ -79,28 +79,8 @@
                                     <h4 class="modal-title"> Residents </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th> Name </th>
-                                                <th> Height </th>
-                                                <th> Mass </th>
-                                                <th> Hair color </th>
-                                                <th> Skin color </th>
-                                                <th> Eye color </th>
-                                                <th> Birth year </th>
-                                                <th> Gender </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            {% for dict_item in planet_info %}
-                                                <td>{{ dict_item['residents'] }}</td>
-                                            {% endfor %}
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <div class="residents">
+                                    </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" data-dismiss="modal"> Close </button>
                                 </div>
