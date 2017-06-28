@@ -20,7 +20,7 @@ $(document).ready(function(){
     $('.resident_btn').click(function(){
         $.ajax({
             type: 'GET',
-            url: 'http://swapi.co/api/people/6',
+            url: 'http://swapi.co/api/people/21',
             success: function(data){
                 console.log(data);
             },

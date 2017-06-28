@@ -1,21 +1,30 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 import json
 import requests
 app = Flask(__name__)
 
+page_counter = 1
+
 
 @app.route('/')
 def main():
-    data = requests.get("http://swapi.co/api/planets")
-    data = data.text
-    data_to_json = json.loads(data)
-    planet_info = []
-    for results in data_to_json['results']:
-        planet_info.append(results)
-    next_link = data_to_json['next']
-    previous_link = data_to_json['previous']
+    global page_counter
+    if request.args.get('prev'):
+        page_counter -= 1
+    elif request.args.get('next'):
+        page_counter += 1
+    elif page_counter == 0:
+        return render_template("error.html")
 
-    return render_template("index.html", planet_info=planet_info, next_link=next_link, previous_link=previous_link)
+    data = "http://swapi.co/api/planets/?page=" + str(page_counter)
+    response = requests.get(data)
+    response = response.text
+    data_to_json = json.loads(response)
+    planet_info = []
+    for result in data_to_json['results']:
+        planet_info.append(result)
+
+    return render_template("index.html", planet_info=planet_info,)
 
 
 @app.route('/sign-up')
