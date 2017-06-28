@@ -1,0 +1,7 @@
+.container {
+    background-image: url(/static/img/sw.png);
+    background-repeat: no-repeat;
+    margin: auto;
+    width: 800px;
+    height: 800px;
+}

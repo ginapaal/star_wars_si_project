@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import json
 import requests
 app = Flask(__name__)
@@ -13,7 +13,11 @@ def main():
         page_counter -= 1
     elif request.args.get('next'):
         page_counter += 1
-    elif page_counter == 0:
+
+    if page_counter <= 0 or page_counter > 7:
+        if request.args.get('back'):
+            data = "http://swapi.co/api/planets/?page=1"
+            return redirect(url_for('main'))
         return render_template("error.html")
 
     data = "http://swapi.co/api/planets/?page=" + str(page_counter)
@@ -24,7 +28,7 @@ def main():
     for result in data_to_json['results']:
         planet_info.append(result)
 
-    return render_template("index.html", planet_info=planet_info,)
+    return render_template("index.html", planet_info=planet_info)
 
 
 @app.route('/sign-up')
