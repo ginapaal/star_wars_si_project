@@ -1,3 +1,4 @@
+
 //Pop-up modal when clicked on residents button
 
 $(document).ready(function(){
@@ -12,10 +13,11 @@ $(document).ready(function(){
     $('.resident_btn').click(function(){
         $.ajax({
             type: 'GET',
-            url: 'http://swapi.co/api/people/1',
+            url: 'http://swapi.co/api/people/6',
             success: function(data){
-               console.log(data);
+                console.log(data);
             },
         });
     })
 });
+
