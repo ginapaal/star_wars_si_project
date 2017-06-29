@@ -1,23 +1,22 @@
+function result(planetList) {
+    for (var i = 0; i < planetList.length; i++) {
+        var planet = planetList[i];
+        console.log(planet);
+    }
+}
 
-//Pop-up modal when clicked on residents button
+function getPlanetInfo(link) {
+    $.getJSON(link, function(data) {     //shorthand AJAX function
+        $("#planetTable").find("tr:gt(0)").remove();   //:gt stands for gretaer than (the index)
 
-$(document).ready(function(){
-    $('.resident_btn').click(function(){
-        $('#residentModal').modal('toggle');
-    });
-});
+        result(data['results']);
 
-//display people when residents button clicked
-
-$(document).ready(function(){
-    $('.resident_btn').click(function(){
-        $.ajax({
-            type: 'GET',
-            url: 'http://swapi.co/api/people/6',
-            success: function(data){
-                console.log(data);
-            },
-        });
     })
-});
+};
 
+
+function main() {
+    getPlanetInfo('https://swapi.co/api/planets/?page=1'); 
+}
+
+$(document).ready(main);
