@@ -1,3 +1,21 @@
+function previousButton() {
+    var button = document.createElement("button");
+    var buttonText = document.createTextNode('Previous');
+    button.appendChild(buttonText);
+    document.getElementById("buttonsPlace").appendChild(button);
+
+    button.setAttribute('id', 'prev');
+    
+};
+
+function nextButton() {
+    var button = document.createElement('button');
+    var buttonText = document.createTextNode('Next');
+    button.appendChild(buttonText);
+    document.getElementById("buttonsPlace").appendChild(button);
+};
+
+
 function createNewRow (planetObj) {
 
     var newRow = document.createElement("tr");
@@ -50,7 +68,9 @@ function getPlanetInfo(link) {
 
 
 function main() {
-    getPlanetInfo('https://swapi.co/api/planets/?page=1'); 
+    getPlanetInfo('https://swapi.co/api/planets/?page=1');
+    previousButton();
+    nextButton();
 }
 
 $(document).ready(main);
