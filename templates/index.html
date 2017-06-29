@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Bootstrap style -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- favicon -->
-    <link rel="shortcut icon" href="/static/img/Star-Wars-Logo_Silver.png">
-    <link rel="stylesheet" href="static/css/main.css">
-    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="static/js/main.js" defer></script>
+    <link rel="shortcut icon" href="/static/img/sw.png">
+    <!-- jQuery, js -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" defer></script>
     <title>The world of star wars</title>
+    <title>Document</title>
 </head>
 <body>
     <!-- Navbar -->
@@ -33,13 +32,11 @@
     <div class="container">
         <div class="jumbotron">
             <h1> Star Wars universe planets </h1>
-            <form action="/">
-                <input type="submit" class="btn btn-info" id="prev" name="prev" value="Previous">
-                <input type="submit" class="btn btn-info" id="next" name="next" value="Next">
-            </form>
+             <div id = "buttonsPlace"> </div>
         </div>
+    
     <!-- Table -->
-        <table class="table table-bordered table-hover" id="table">
+        <table class="table table-bordered table-hover" id="planetTable" border="1">
             <thead>
                 <tr>
                     <th> Name </th>
@@ -52,37 +49,38 @@
                 </tr>
             </thead>
             <tbody>
-                {% for dict_item in planet_info %}  
-                <tr>
-                    <td>{{ dict_item['name'] }}</td>
-                    <td>{{ dict_item['diameter'] }}</td>
-                    <td>{{ dict_item['climate'] }}</td>
-                    <td>{{ dict_item['terrain'] }}</td>
-                    <td>{{ dict_item['surface_water'] }} %</td>
-                    <td>{{ dict_item['population'] }}</td>
-                    {% if dict_item['residents']==[] %}
-                        <td> No known residents</td>
-                    {% else %}
-                        <td><button class="resident_btn"> {{ dict_item['residents']|length }} residents</button> </td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
+
             </tbody>
         </table>
-        <!-- Modal -->
+       
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="modal" id="residentModal">
-                        <div class="modal-dialog">
+                    <div class="modal" id="residentsModal" role="dialog">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button class="close" data-dismiss="modal"><img src="{{ url_for('static', filename='img/Button_12-512.png') }}" height="20px" width="20px"></button>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title"> Residents </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="residents">
-                                    </div>
+                                    <table class="table table-bordered table-hover" id="residentsTable" border="1">
+                                        <thead>
+                                             <tr>
+                                                 <th> Name </th>
+                                                 <th> Height </th>
+                                                 <th> Mass </th>
+                                                 <th> Hair color </th>
+                                                 <th> Skin color </th>
+                                                 <th> Eye color </th>
+                                                 <th> Birth year </th>
+                                                 <th> Gender </th>
+                                             </tr>
+                                         </thead>
+                                         <tbody id="residentsTableBody">
+                                            
+                                         </tbody>
+                                     </table>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" data-dismiss="modal"> Close </button>
                                 </div>
