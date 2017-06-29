@@ -1,11 +1,23 @@
 function previousButton() {
+    //add button to html
     var button = document.createElement("button");
     var buttonText = document.createTextNode('Previous');
     button.appendChild(buttonText);
     document.getElementById("buttonsPlace").appendChild(button);
 
     button.setAttribute('id', 'prev');
-    
+    button.setAttribute('class', 'btn btn-info');
+
+    //define action of button
+    button.addEventListener('click', function(){
+        if (button.getAttribute('data-link') != null) {
+            var previousLink = button.getAttribute("data-link");
+            var previousHttpsLink = previousLink.replace('http', 'https');
+            getPlanetInfo(previousHttpsLink); 
+        } else  {
+            alert('Go further, do not, no more planets, there are. ');
+        }
+    });
 };
 
 function nextButton() {
@@ -13,7 +25,21 @@ function nextButton() {
     var buttonText = document.createTextNode('Next');
     button.appendChild(buttonText);
     document.getElementById("buttonsPlace").appendChild(button);
-};
+
+    button.setAttribute('id', 'next');
+    button.setAttribute('class', 'btn btn-info');
+
+    button.addEventListener('click', function(){
+        if (button.getAttribute('data-link') != null) {
+            var nextLink = button.getAttribute("data-link");
+            var nextHttpsLink = nextLink.replace('http', 'https');
+            getPlanetInfo(nextHttpsLink); 
+        } 
+        if (button.getAttribute('data-link') === null) {
+            alert('Go further, do not, no more planets, there are. ');
+        }
+    });
+}
 
 
 function createNewRow (planetObj) {
@@ -44,14 +70,18 @@ function createNewRow (planetObj) {
     newCell.textContent = planetObj['population'];
     newRow.appendChild(newCell);
 
+    var newCell = document.createElement("td");
+    newCell.textContent = planetObj['residents'].length;
+    newRow.appendChild(newCell);
+
     return newRow
-};
+}
 
 function result(planetList) {
     for (var i = 0; i < planetList.length; i++) {
         var planet = planetList[i];
         var row = createNewRow(planet);
-        console.log(planet);
+        
 
         document.getElementById("planetTable").appendChild(row);
     }
@@ -63,8 +93,16 @@ function getPlanetInfo(link) {
 
         result(data['results']);
 
+        var previousButton = document.getElementById('prev');
+        var previousLink = data['previous'];
+        previousButton.setAttribute("data-link", previousLink);
+
+        var nextButton = document.getElementById('next');
+        var nextLink = data['next'];
+        nextButton.setAttribute('data-link', nextLink)
+
     })
-};
+}
 
 
 function main() {
