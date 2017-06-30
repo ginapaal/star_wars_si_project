@@ -23,7 +23,6 @@ def sign_up():
         username = request.form.get("user-signup")
         password = request.form.get("pwd-signup")
         password = pw_hash.hash_pw(password)
-        print(password)
         data_handler.sign_up(username, password, connect_to_db())
         return redirect(url_for("main"))
     
