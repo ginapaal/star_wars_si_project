@@ -1,6 +1,6 @@
 global db_name
-db_name = "gina"
+db_name = ""
 global user
-user = "gina"
+user = ""
 global password
-password = "thebest"
+password = ""
