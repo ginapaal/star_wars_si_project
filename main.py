@@ -12,9 +12,14 @@ def main():
     return render_template("index.html")
 
 
-@app.route("/log-in")
+@app.route("/log-in", methods=['GET', 'POST'])
 def log_in():
-    return render_template("log_in.html")
+    reg_user_list = data_handler.login(connect_to_db())
+    print(reg_user_list)
+    username = request.form.get('usr-login')
+    print(username)
+
+    return render_template('log_in.html')
 
 
 @app.route("/sign-up", methods=['GET', 'POST'])
@@ -25,7 +30,7 @@ def sign_up():
         password = pw_hash.hash_pw(password)
         data_handler.sign_up(username, password, connect_to_db())
         return redirect(url_for("main"))
-    
+
     return render_template('sign_up.html')
 
 
