@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import data_handler
 from conn_man import connect_to_db
 import pw_hash
 
 
 app = Flask(__name__)
+app.secret_key = "Super secret key, this is."
+app.config['SESSION_TYPE'] = 'filesystem'
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -22,6 +24,7 @@ def log_in():
         usr_tpl = (username, h_password,)
         for elem in reg_user_list:
             if usr_tpl == elem:
+                session['username'] = username
                 return render_template("index.html", username=username, h_password=h_password)
     except AttributeError:
         return render_template('log_in.html')
@@ -40,9 +43,11 @@ def sign_up():
 
     return render_template('sign_up.html')
 
+
 @app.route("/log-out")
 def logout():
-    pass
+    session.pop('username', None)
+    return render_template("index.html")
 
 
 if __name__ == '__main__':
