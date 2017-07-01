@@ -10,8 +10,8 @@ def connect_to_db():
         url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
         conn = psycopg2.connect(database=url.path[1:], user=url.username, password=url.password, host=url.hostname, port=url.port)
         conn.autocommit = True
-    except psycopg2.Error:
-        print("""Connection with database failed. You made a typo in your database name, username or password.
-            You should check your config.py""")
-
+    except UnboundLocalError and psycopg2.Error:
+        conn = psycopg2.connect("dbname='{}' user='{}' host='localhost' password='{}'".format(
+            config.db_name, config.user, config.password))
+        conn.autocommit = True
     return conn

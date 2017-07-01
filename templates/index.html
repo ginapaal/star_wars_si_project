@@ -45,6 +45,18 @@
     <!-- Table -->
         <table class="table table-bordered table-hover" id="planetTable" border="1">
             <thead>
+                {% if username %}
+                <tr>
+                    <th> Name </th>
+                    <th> Diameter </th>
+                    <th> Climate </th>
+                    <th> Terrain </th>
+                    <th> Water </th>
+                    <th> Population </th>
+                    <th> Residents </th>
+                    <th> Votes </th>
+                </tr>
+                {% else %}
                 <tr>
                     <th> Name </th>
                     <th> Diameter </th>
@@ -54,6 +66,7 @@
                     <th> Population </th>
                     <th> Residents </th>
                 </tr>
+                {% endif %}
             </thead>
             <tbody>
 
