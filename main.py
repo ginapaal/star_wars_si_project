@@ -26,6 +26,8 @@ def log_in():
     except AttributeError:
         return render_template('log_in.html')
 
+    return render_template('log_in.html')
+
 
 @app.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
@@ -37,6 +39,10 @@ def sign_up():
         return redirect(url_for("main"))
 
     return render_template('sign_up.html')
+
+@app.route("/log-out")
+def logout():
+    pass
 
 
 if __name__ == '__main__':
