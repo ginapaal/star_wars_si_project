@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import data_handler
 from conn_man import connect_to_db
 import pw_hash
+import psycopg2
 
 
 app = Flask(__name__)
@@ -34,12 +35,16 @@ def log_in():
 
 @app.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
-    if request.form.get("user-signup") and request.form.get("pwd-signup"):
-        username = request.form.get("user-signup")
-        password = request.form.get("pwd-signup")
-        password = pw_hash.hash_pw(password)
-        data_handler.sign_up(username, password, connect_to_db())
-        return redirect(url_for("main"))
+    try:
+        if request.form.get("user-signup") and request.form.get("pwd-signup"):
+            username = request.form.get("user-signup")
+            password = request.form.get("pwd-signup")
+            password = pw_hash.hash_pw(password)
+            data_handler.sign_up(username, password, connect_to_db())
+            return redirect(url_for("main"))
+    except psycopg2.IntegrityError:
+            message = "This username is already in use, pick another one."
+            return render_template('sign_up.html', message=message)
 
     return render_template('sign_up.html')
 
