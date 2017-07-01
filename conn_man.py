@@ -1,6 +1,7 @@
 import psycopg2
 import config
 import urllib
+import os
 
 
 def connect_to_db():

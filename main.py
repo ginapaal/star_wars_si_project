@@ -28,7 +28,7 @@ def log_in():
                 return render_template("index.html", username=username, h_password=h_password)
     except AttributeError:
         return render_template('log_in.html')
-
+    
     return render_template('log_in.html')
 
 
