@@ -15,9 +15,13 @@ def main():
 @app.route("/log-in", methods=['GET', 'POST'])
 def log_in():
     reg_user_list = data_handler.login(connect_to_db())
-    print(reg_user_list)
     username = request.form.get('usr-login')
-    print(username)
+    password = request.form.get('pwd-login')
+    password = pw_hash.hash_pw(password)
+    usr_tpl = (username, password,)
+    for elem in reg_user_list:
+        if usr_tpl == elem:
+            print("hallelujah")
 
     return render_template('log_in.html')
 

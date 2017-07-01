@@ -10,7 +10,7 @@ def sign_up(username, password, conn):
 
 def login(conn):
     cursor = conn.cursor()
-    cursor.execute("""SELECT username FROM users;""")
+    cursor.execute("""SELECT username, password FROM users;""")
     rows = cursor.fetchall()
     cursor.close()
     return rows
